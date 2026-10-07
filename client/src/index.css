@@ -1,0 +1,96 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+html,
+body,
+#root {
+  height: 100%;
+}
+
+body {
+  @apply bg-ink-950 text-ink-200 antialiased;
+}
+
+/* ---------- Editor ---------- */
+
+.editor-surface .tiptap {
+  @apply font-serif text-[1.125rem] leading-[1.9] text-ink-100 outline-none min-h-[60vh];
+}
+
+.editor-surface .tiptap p {
+  @apply my-4;
+}
+
+.editor-surface .tiptap h1,
+.editor-surface .tiptap h2,
+.editor-surface .tiptap h3 {
+  @apply font-semibold text-ink-100 mt-8 mb-3;
+}
+
+.editor-surface .tiptap h1 { @apply text-2xl; }
+.editor-surface .tiptap h2 { @apply text-xl; }
+.editor-surface .tiptap h3 { @apply text-lg; }
+
+.editor-surface .tiptap blockquote {
+  @apply border-l-2 border-ink-600 pl-4 italic text-ink-300;
+}
+
+.editor-surface .tiptap ul { @apply list-disc pl-6; }
+.editor-surface .tiptap ol { @apply list-decimal pl-6; }
+.editor-surface .tiptap hr { @apply border-ink-700 my-8; }
+
+.editor-surface .tiptap p.is-editor-empty:first-child::before {
+  content: attr(data-placeholder);
+  @apply text-ink-600 float-left h-0 pointer-events-none;
+}
+
+.editor-surface .tiptap ::selection {
+  background: rgba(217, 158, 43, 0.25);
+}
+
+/* Current-line highlight: subtle band on the paragraph under the cursor */
+.editor-surface .tiptap.ProseMirror-focused .current-line {
+  background: rgba(217, 158, 43, 0.07);
+  box-shadow: -12px 0 0 rgba(217, 158, 43, 0.07), 12px 0 0 rgba(217, 158, 43, 0.07);
+  border-radius: 2px;
+}
+
+/* ---------- Scrollbars ---------- */
+
+* {
+  scrollbar-width: thin;
+  scrollbar-color: #3b4152 transparent;
+}
+*::-webkit-scrollbar { width: 8px; height: 8px; }
+*::-webkit-scrollbar-thumb { background: #3b4152; border-radius: 4px; }
+*::-webkit-scrollbar-track { background: transparent; }
+
+/* ---------- Shared UI primitives ---------- */
+
+@layer components {
+  .btn {
+    @apply inline-flex items-center gap-1.5 rounded-md px-3 py-1.5 text-sm font-medium transition-colors disabled:opacity-40 disabled:cursor-not-allowed;
+  }
+  .btn-primary {
+    @apply btn bg-accent-500 text-ink-950 hover:bg-accent-400;
+  }
+  .btn-secondary {
+    @apply btn bg-ink-700 text-ink-100 hover:bg-ink-600;
+  }
+  .btn-ghost {
+    @apply btn text-ink-300 hover:bg-ink-800 hover:text-ink-100;
+  }
+  .btn-danger {
+    @apply btn bg-red-900/60 text-red-200 hover:bg-red-800/70;
+  }
+  .input {
+    @apply w-full rounded-md bg-ink-800 border border-ink-700 px-3 py-1.5 text-sm text-ink-100 placeholder-ink-500 focus:outline-none focus:border-accent-500/60;
+  }
+  .label {
+    @apply block text-xs font-medium uppercase tracking-wide text-ink-400 mb-1;
+  }
+  .card {
+    @apply rounded-lg bg-ink-900 border border-ink-800;
+  }
+}

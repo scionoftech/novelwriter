@@ -1,0 +1,24 @@
+{
+  "name": "novelwriter",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Personal novel writing studio with AI assistance (Anthropic, AWS Bedrock, Ollama)",
+  "workspaces": [
+    "server",
+    "client"
+  ],
+  "scripts": {
+    "dev": "concurrently -n server,client -c blue,magenta \"bun run --cwd server dev\" \"bun run --cwd client dev\"",
+    "build": "bun run --cwd client build && bun run --cwd server build",
+    "start": "bun run --cwd server start",
+    "typecheck": "bun run --cwd server typecheck && bun run --cwd client typecheck"
+  },
+  "devDependencies": {
+    "concurrently": "^9.0.0"
+  },
+  "packageManager": "bun@1.4.2",
+  "overrides": {
+    "@types/express": "^4.17.21",
+    "@types/express-serve-static-core": "^4.19.6"
+  }
+}
